@@ -12,12 +12,9 @@ export default function Login() {
       <Head>
         <title>Login</title>
       </Head>
-      <LoginContainer>
-        <Logo src="https://www.freepnglogos.com/uploads/whatsapp-logo-app-png-4.png" />
-        <Button onClick={signIn} variant="outlined">
-          Sign in with Google
-        </Button>
-      </LoginContainer>
+      <Button onClick={signIn} variant="outlined">
+        Sign in to continue
+      </Button>
     </Container>
   );
 }
@@ -26,19 +23,4 @@ const Container = styled.div`
   display: grid;
   place-items: center;
   height: 100vh;
-  background-color: #AEBAC1;
-`;
-const LoginContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 100px;
-  border-radius: 10px;
-  box-shadow: 0px 4px 14px -3px rgba(0, 0, 0, 0.7);
-  background-color: white;
-`;
-const Logo = styled.img`
-  height: 200px;
-  width: 200px;
-  margin-bottom: 50px;
 `;

@@ -1,8 +1,6 @@
-import { Avatar, Button, IconButton } from "@material-ui/core";
+import { Avatar, IconButton } from "@material-ui/core";
 import styled from "styled-components";
 import ChatIcon from "@material-ui/icons/Chat";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import SearchIcon from "@material-ui/icons/Search";
 import * as EmailValidator from "email-validator";
 import { auth, db } from "../../firebase";
 import { useCollection } from "react-firebase-hooks/firestore";
@@ -48,14 +46,9 @@ export default function Sidebar() {
         <StickyContainer>
           <Header>
             <UserAvatar src={user.photoURL} onClick={() => auth.signOut()} />
-            <div>
-              <IconButton>
-                <ChatIcon style={{ color: "#AEBAC1" }} onClick={createChat} />
-              </IconButton>
-              <IconButton>
-                <MoreVertIcon style={{ color: "#AEBAC1" }} />
-              </IconButton>
-            </div>
+            <IconButton>
+              <ChatIcon style={{ color: "#AEBAC1" }} onClick={createChat} />
+            </IconButton>
           </Header>
           <Search>
             <SearchInput

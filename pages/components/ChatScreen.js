@@ -1,14 +1,10 @@
-import { Avatar, IconButton } from "@material-ui/core";
+import { Avatar } from "@material-ui/core";
 import { useRouter } from "next/router";
 import { useAuthState } from "react-firebase-hooks/auth";
 import styled from "styled-components";
 import { auth, db } from "../../firebase";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import AttachFileIcon from "@material-ui/icons/AttachFile";
-import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
 import { useCollection } from "react-firebase-hooks/firestore";
 import firebase from "firebase";
-import MicIcon from "@material-ui/icons/Mic";
 import Message from "./Message";
 import { useRef, useState, useEffect } from "react";
 import getRecipientEmail from "../../utils/getRecipientEmail";
@@ -110,21 +106,12 @@ export default function ChatScreen({ chat, messages }) {
             <p>Loading Last active ...</p>
           )}
         </HeaderInformation>
-        <HeaderIcons>
-          <IconButton>
-            <AttachFileIcon />
-          </IconButton>
-          <IconButton>
-            <MoreVertIcon />
-          </IconButton>
-        </HeaderIcons>
       </Header>
       <MessageContainer>
         {showMessages()}
         <div ref={endOfMessagesRef} />
       </MessageContainer>
       <InputContainer>
-        <InsertEmoticonIcon />
         <Input
           value={input}
           placeholder="Type a message"
@@ -133,7 +120,6 @@ export default function ChatScreen({ chat, messages }) {
         <button hidden disabled={!input} type="submit" onClick={sendMessage}>
           Send Message
         </button>
-        <MicIcon />
       </InputContainer>
     </Container>
   );
@@ -143,12 +129,13 @@ export default function ChatScreen({ chat, messages }) {
 const Container = styled.div``;
 const Header = styled.div`
   position: sticky;
-  background-color: #202C33;
+  background-color: #202c33;
   z-index: 100;
   top: 0;
   display: flex;
   padding: 11px;
   height: 80px;
+  color: white;
   align-items: center;
   word-break: break-word;
   border-bottom: 0.5px solid rgb(194, 187, 187);
@@ -171,6 +158,7 @@ const MessageContainer = styled.div`
   padding: 30px;
   display: flex;
   flex-direction: column;
+  background-color: #111b21 !important;
   justify-content: end;
   background-color: #e5ded8;
   min-height: 90vh;
@@ -182,15 +170,17 @@ const InputContainer = styled.form`
   position: sticky;
   bottom: 0;
   color: grey;
-  background-color: #202C33;
+  background-color: #111b21;
   z-index: 100;
 `;
 const Input = styled.input`
   flex: 1;
   outline: 0;
   border: none;
-  border-radius: 22px;
-  background-color: white;
+  border-radius: 5px;
+  background-color: #202c33;
+  color: white;
+  font-size: 16px;
   padding: 20px;
   margin-left: 15px;
   margin-right: 15px;

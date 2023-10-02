@@ -48,12 +48,9 @@ export async function getServerSideProps(context) {
   };
 }
 
-
-
-
-
 const Container = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
 `;
 const ChatContainer = styled.div`
   flex: 1;
