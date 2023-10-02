@@ -1,31 +1,13 @@
-# WhatsApp Clone ⚡
-
-
-![](assets/whclone4.png)
-
-Whatsapp Clone provides an overview on how to create a full-stack web application from scratch. This repository covers implementation of Whatsapp web using Google signin⚡.
-
-### You can see the following features in action in this repository,
+### Features Added:
 * *Google Authentication*
-* *Vercel Deployment*
-* *Instant & Realtime textual One to One chat*
-* *User's Online/Offline availability*
+* *Live Deployment*
+* *Realtime one-to-one chat application*
 * *Last Seen time*
-* *WhatsApp Web with realtime chat.*
-
-```
-If you like the work then don't forget to hit that ⭐ button to show some appreciation & love
-for this project as your token of love does wonders.
-```
 
 ## Major Technologies Used
 - Next.js
 - Material UI
-- Styled Components
-- Google Firebase
-
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app
-
+- Firebase
 ## Live Action
 
 * #### Online Website : <a href="https://whatsapp-project.vercel.app/">WhatsApp Clone Web</a>
