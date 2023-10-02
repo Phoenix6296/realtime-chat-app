@@ -26,7 +26,7 @@ const Container = styled.div`
   display: grid;
   place-items: center;
   height: 100vh;
-  background-color: whitesmoke;
+  background-color: #AEBAC1;
 `;
 const LoginContainer = styled.div`
   display: flex;

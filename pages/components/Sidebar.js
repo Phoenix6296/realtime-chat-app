@@ -8,9 +8,12 @@ import { auth, db } from "../../firebase";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Chat from "./Chat";
+import { SearchInput } from "./SearchInput";
+import { useState } from "react";
 
 export default function Sidebar() {
   const [user] = useAuthState(auth);
+  const [searchText, setSearchText] = useState("");
   const userChatRef = db
     .collection("chats")
     .where("user", "array-contains", user.email);
@@ -42,23 +45,26 @@ export default function Sidebar() {
   return (
     <div>
       <Container>
-        <Header>
-          <UserAvatar src={user.photoURL} onClick={() => auth.signOut()} />
-          <IconsContainer>
-            <IconButton>
-              <ChatIcon />
-            </IconButton>
-            <IconButton>
-              <MoreVertIcon />
-            </IconButton>
-          </IconsContainer>
-        </Header>
-        <Search>
-          <SearchIcon size="small" />
-          <SearchInput placeholder="        Search or start new chat" />
-        </Search>
-        <SidebarButton onClick={createChat}>START A NEW CHART</SidebarButton>
-
+        <StickyContainer>
+          <Header>
+            <UserAvatar src={user.photoURL} onClick={() => auth.signOut()} />
+            <div>
+              <IconButton>
+                <ChatIcon style={{ color: "#AEBAC1" }} onClick={createChat} />
+              </IconButton>
+              <IconButton>
+                <MoreVertIcon style={{ color: "#AEBAC1" }} />
+              </IconButton>
+            </div>
+          </Header>
+          <Search>
+            <SearchInput
+              placeholder="Search or start new chat"
+              value={searchText}
+              setValue={setSearchText}
+            />
+          </Search>
+        </StickyContainer>
         {chatsSnapshot?.docs.map((chat) => (
           <Chat key={chat.id} id={chat.id} users={chat.data().user} />
         ))}
@@ -67,10 +73,18 @@ export default function Sidebar() {
   );
 }
 
+const StickyContainer = styled.div`
+  display: flex;
+  position: sticky;
+  top: 0;
+  flex-direction: column;
+  flex: 1;
+`;
 const Container = styled.div`
   flex: 0.45;
-  border-right: 1px solid rgb(194, 187, 187);
+  border-right: 0.5px solid #aebac1;
   height: 100vh;
+  background-color: #111b21;
   font-size: 20px;
   min-width: 30vw;
   max-width: 35vw;
@@ -85,13 +99,12 @@ const Header = styled.div`
   display: flex;
   position: sticky;
   top: 0;
-  background-color: rgb(236, 236, 236);
+  background-color: #202c33;
   z-index: 1;
   justify-content: space-between;
   align-items: center;
   padding: 15px;
   height: 80px;
-  //border-bottom: 1px solid rgb(167, 167, 167);
 `;
 const UserAvatar = styled(Avatar)`
   cursor: pointer;
@@ -101,24 +114,8 @@ const UserAvatar = styled(Avatar)`
 `;
 const Search = styled.div`
   display: flex;
-  color: grey;
-  background-color: whitesmoke;
+  background-color: #111b21;
   align-items: center;
   padding: 14px;
-  border-radius: 2px;
+  border-bottom: 1px solid #aebac1;
 `;
-const SearchInput = styled.input`
-  outline-width: 10px;
-  border: none;
-  height: 40px;
-  border-radius: 15px;
-  flex: 1;
-`;
-const SidebarButton = styled(Button)`
-  width: 100%;
-  &&& {
-    border-top: 1px solid whitesmoke;
-    border-bottom: 1px solid whitesmoke;
-  }
-`;
-const IconsContainer = styled.div``;

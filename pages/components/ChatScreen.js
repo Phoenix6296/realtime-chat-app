@@ -143,7 +143,7 @@ export default function ChatScreen({ chat, messages }) {
 const Container = styled.div``;
 const Header = styled.div`
   position: sticky;
-  background-color: rgb(236, 236, 236);
+  background-color: #202C33;
   z-index: 100;
   top: 0;
   display: flex;
@@ -182,7 +182,7 @@ const InputContainer = styled.form`
   position: sticky;
   bottom: 0;
   color: grey;
-  background-color: rgb(236, 236, 236);
+  background-color: #202C33;
   z-index: 100;
 `;
 const Input = styled.input`
