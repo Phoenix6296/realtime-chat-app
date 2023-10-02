@@ -14,7 +14,7 @@ import { useRef, useState, useEffect } from "react";
 import getRecipientEmail from "../../utils/getRecipientEmail";
 import TimeAgo from "timeago-react";
 
-function ChatScreen({ chat, messages }) {
+export default function ChatScreen({ chat, messages }) {
   const endOfMessagesRef = useRef(null);
   const [user] = useAuthState(auth);
   const [input, setInput] = useState("");
@@ -195,5 +195,3 @@ const Input = styled.input`
   margin-left: 15px;
   margin-right: 15px;
 `;
-
-export default ChatScreen;

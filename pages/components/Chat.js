@@ -5,11 +5,9 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db } from "../../firebase";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { useRouter } from "next/dist/client/router";
-function Chat({ key, id, users }) {
+export default function Chat({ key, id, users }) {
   const router = useRouter();
-  //console.log(id, users);
   const [user] = useAuthState(auth);
-  //console.log(user);
   const [recipientSnapshot] = useCollection(
     db.collection("users").where("email", "==", getRecipientEmail(users, user))
   );
@@ -30,13 +28,10 @@ function Chat({ key, id, users }) {
   );
 }
 
-export default Chat;
-
 const UserAvatar = styled(Avatar)`
   margin: 5px;
   margin-right: 15px;
 `;
-
 const Container = styled.div`
   display: flex;
   align-items: center;

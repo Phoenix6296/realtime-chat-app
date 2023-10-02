@@ -9,7 +9,7 @@ import { useCollection } from "react-firebase-hooks/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Chat from "./Chat";
 
-function Sidebar() {
+export default function Sidebar() {
   const [user] = useAuthState(auth);
   const userChatRef = db
     .collection("chats")
@@ -21,22 +21,14 @@ function Sidebar() {
       "Please enter a valid email address for the user to chat with"
     );
     if (!input) return null;
-    /*const re =
-      EmailValidator.validate(input) &&
-      !chatAlreadyExists(input) &&
-      input !== user.email;
-    console.log(input + "this is " + re);*/
     if (
       EmailValidator.validate(input) &&
       !chatAlreadyExists(input) &&
       input !== user.email
     ) {
-      //here we add chat to DB
       db.collection("chats").add({
         user: [user.email, input],
       });
-    } else {
-      console.log("something went wrong");
     }
   };
 
@@ -75,7 +67,6 @@ function Sidebar() {
   );
 }
 
-export default Sidebar;
 const Container = styled.div`
   flex: 0.45;
   border-right: 1px solid rgb(194, 187, 187);

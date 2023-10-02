@@ -3,7 +3,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import styled from "styled-components";
 import { auth } from "../../firebase";
 
-function Message({ user, message }) {
+export default function Message({ user, message }) {
   const [userLoggedIn] = useAuthState(auth);
   const TypeOfMessage = user === userLoggedIn.email ? Sender : Reciever;
   return (
@@ -18,7 +18,6 @@ function Message({ user, message }) {
   );
 }
 
-export default Message;
 const Container = styled.div``;
 const MessageElement = styled.div`
   width: fit-content;
@@ -45,7 +44,6 @@ const Timestamp = styled.span`
   padding-left: 12px;
   margin-bottom: 0px;
   font-size: 9px;
-
   text-align: right;
   margin-right: 0;
 `;
