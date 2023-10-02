@@ -153,7 +153,6 @@ const HeaderInformation = styled.div`
     margin-top: 2px;
   }
 `;
-const HeaderIcons = styled.div``;
 const MessageContainer = styled.div`
   padding: 30px;
   display: flex;

@@ -40,6 +40,14 @@ export default function Sidebar() {
     );
   };
 
+  const filteredChats = () => {
+    if (!searchText.trim()) return chatsSnapshot?.docs;
+    return chatsSnapshot?.docs.filter((doc) => {
+      const users = doc.data().user;
+      return users.some((userEmail) => userEmail.includes(searchText));
+    });
+  };
+
   return (
     <div>
       <Container>
@@ -58,7 +66,7 @@ export default function Sidebar() {
             />
           </Search>
         </StickyContainer>
-        {chatsSnapshot?.docs.map((chat) => (
+        {filteredChats()?.map((chat) => (
           <Chat key={chat.id} id={chat.id} users={chat.data().user} />
         ))}
       </Container>
