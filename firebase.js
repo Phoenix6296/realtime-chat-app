@@ -1,11 +1,11 @@
 import firebase from "firebase";
 const firebaseConfig = {
-  apiKey: "AIzaSyCH5b85g8aiI0NT0GYQykLPNXsfE9I7REs",
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: "whatsapp-text.firebaseapp.com",
   projectId: "whatsapp-text",
   storageBucket: "whatsapp-text.appspot.com",
-  messagingSenderId: "868325437074",
-  appId: "1:868325437074:web:344a69e7e5a7281a2d004b",
+  messagingSenderId: process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
   measurementId: "G-29ZZ465HZ0",
 };
 
