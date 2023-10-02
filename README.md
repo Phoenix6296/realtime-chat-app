@@ -2,7 +2,6 @@
 * *Google Authentication*
 * *Live Deployment*
 * *Realtime one-to-one chat application*
-* *Last Seen time*
 
 ## Major Technologies Used
 - Next.js
@@ -10,4 +9,12 @@
 - Firebase
 ## Live Action
 
-* #### Online Website : <a href="krishnas-realtime-chat.netlify.app">WhatsApp Clone Web</a>
+* #### Online Website : <a href="https://krishnas-realtime-chat.netlify.app" target="_blank">Live Link</a>
+
+## Local Setup:
+- Clone and repo and navigate inside the repo.
+- Run `npm install --legacy-peer-deps`
+- npm run dev
+- Open http://localhost:3000 on browser.
+
+#### LINKEDIN: https://www.linkedin.com/in/iamkrishnabiswakarma/
