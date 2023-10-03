@@ -9,7 +9,7 @@
 - Firebase
 ## Live Action
 
-* #### Online Website : <a href="https://krishnas-realtime-chat.netlify.app" target="_blank">Live Link</a>
+* #### Online Website : <a href="https://krishnas-realtime-chat.vercel.app" target="_blank">Live Link</a>
 
 ## Local Setup:
 - Clone and repo and navigate inside the repo.
