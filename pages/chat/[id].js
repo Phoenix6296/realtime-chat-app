@@ -51,11 +51,11 @@ export async function getServerSideProps(context) {
 const Container = styled.div`
   display: grid;
   grid-template-columns: 1fr 2fr;
+  height: 100vh;
 `;
 const ChatContainer = styled.div`
   flex: 1;
   overflow: scroll;
-  height: 100vh;
   ::-webkit-scrollbar {
     display: none;
   }

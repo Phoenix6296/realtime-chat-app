@@ -8,6 +8,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import Chat from "./Chat";
 import { SearchInput } from "./SearchInput";
 import { useState } from "react";
+import { truncate } from "../../utils/helper";
 
 export default function Sidebar() {
   const [user] = useAuthState(auth);
@@ -53,7 +54,10 @@ export default function Sidebar() {
       <Container>
         <StickyContainer>
           <Header>
-            <UserAvatar src={user.photoURL} onClick={() => auth.signOut()} />
+            <UserDetails>
+              <UserAvatar src={user.photoURL} onClick={() => auth.signOut()} />
+              <UserEmail>{truncate(user.email)}</UserEmail>
+            </UserDetails>
             <IconButton>
               <ChatIcon style={{ color: "#AEBAC1" }} onClick={createChat} />
             </IconButton>
@@ -74,6 +78,16 @@ export default function Sidebar() {
   );
 }
 
+const UserDetails = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
+const UserEmail = styled.span`
+  font-size: 16px;
+  font-weight: 500;
+  color: #aebac1;
+`;
 const StickyContainer = styled.div`
   display: flex;
   position: sticky;

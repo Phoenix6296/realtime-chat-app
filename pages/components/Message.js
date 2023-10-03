@@ -7,18 +7,17 @@ export default function Message({ user, message }) {
   const [userLoggedIn] = useAuthState(auth);
   const TypeOfMessage = user === userLoggedIn.email ? Sender : Reciever;
   return (
-    <Container>
+    <>
       <TypeOfMessage>
         <Mes>{message.message}</Mes>
         <Timestamp>
           {message.timestamp ? moment(message.timestamp).format("LT") : "..."}
         </Timestamp>
       </TypeOfMessage>
-    </Container>
+    </>
   );
 }
 
-const Container = styled.div``;
 const MessageElement = styled.div`
   width: fit-content;
   padding: 6px;
@@ -27,7 +26,7 @@ const MessageElement = styled.div`
   margin: 5px;
   min-width: 60px;
   position: relative;
-  font-size: 20px;
+  font-size: 16px;
   text-align: left;
 `;
 const Sender = styled(MessageElement)`

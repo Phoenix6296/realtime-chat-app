@@ -126,7 +126,11 @@ export default function ChatScreen({ chat, messages }) {
 }
 
 // Styled components
-const Container = styled.div``;
+const Container = styled.div`
+  flex-direction: column;
+  display: flex;
+  height: 100vh;
+`;
 const Header = styled.div`
   position: sticky;
   background-color: #202c33;
@@ -154,13 +158,13 @@ const HeaderInformation = styled.div`
   }
 `;
 const MessageContainer = styled.div`
-  padding: 30px;
+  padding: 10px 30px;
   display: flex;
+  flex: 1;
   flex-direction: column;
   background-color: #111b21 !important;
   justify-content: end;
   background-color: #e5ded8;
-  min-height: 90vh;
 `;
 const InputContainer = styled.form`
   display: flex;
