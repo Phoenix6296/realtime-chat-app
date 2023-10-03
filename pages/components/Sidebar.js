@@ -78,9 +78,13 @@ export default function Sidebar() {
           />
         </Search>
       </StickyContainer>
-      {filteredChats()?.map((chat) => (
-        <Chat key={chat.id} id={chat.id} users={chat.data().user} />
-      ))}
+      {filteredChats()?.length > 0 ? (
+        filteredChats()?.map((chat) => (
+          <Chat key={chat.id} id={chat.id} users={chat.data().user} />
+        ))
+      ) : (
+        <NoChat>No Chats</NoChat>
+      )}
       <Modal title={"Add Chat"} isVisible={addChatModal} onClose={resetModal}>
         <Form>
           <input
@@ -163,6 +167,13 @@ const StickyContainer = styled.div`
   top: 0;
   flex-direction: column;
   flex: 1;
+`;
+const NoChat = styled.div`
+  color: #aebac1;
+  font-size: 20px;
+  font-weight: 500;
+  text-align: center;
+  padding: 20px;
 `;
 const Container = styled.div`
   flex: 0.45;
