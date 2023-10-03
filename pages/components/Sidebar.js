@@ -6,10 +6,10 @@ import { auth, db } from "../../firebase";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Chat from "./Chat";
-import { SearchInput } from "./SearchInput";
 import { useState } from "react";
 import { truncate } from "../../utils/helper";
 import Modal from "./Modal";
+import SearchInput from "./SearchInput";
 
 export default function Sidebar() {
   const [user] = useAuthState(auth);

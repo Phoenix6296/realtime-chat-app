@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
-export const SearchInput = ({
+export default function SearchInput({
   placeholder,
   value,
   setValue,
   onFocus,
   containerStyles,
-}) => {
+}) {
   return (
     <Container
       className={`${containerStyles} bg-white rounded-lg relative border`}
@@ -29,7 +29,7 @@ export const SearchInput = ({
       ) : null}
     </Container>
   );
-};
+}
 
 const Container = styled.div`
   position: relative;
