@@ -9,35 +9,41 @@ import Chat from "./Chat";
 import { SearchInput } from "./SearchInput";
 import { useState } from "react";
 import { truncate } from "../../utils/helper";
+import Modal from "./Modal";
 
 export default function Sidebar() {
   const [user] = useAuthState(auth);
   const [searchText, setSearchText] = useState("");
+  const [email, setEmail] = useState("");
+  const [addChatModal, showAddChatModal] = useState(false);
   const userChatRef = db
     .collection("chats")
     .where("user", "array-contains", user.email);
   const [chatsSnapshot] = useCollection(userChatRef);
 
-  const createChat = () => {
-    const input = prompt(
-      "Please enter a valid email address for the user to chat with"
-    );
-    if (!input) return null;
+  const resetModal = () => {
+    showAddChatModal(false);
+    setEmail("");
+  };
+
+  const createChat = (event) => {
+    event.preventDefault();
     if (
-      EmailValidator.validate(input) &&
-      !chatAlreadyExists(input) &&
-      input !== user.email
+      EmailValidator.validate(email) &&
+      !chatAlreadyExists(email) &&
+      email !== user.email
     ) {
       db.collection("chats").add({
-        user: [user.email, input],
+        user: [user.email, email],
       });
+      resetModal();
     }
   };
 
   const chatAlreadyExists = (recipientEmail) => {
-    !!chatsSnapshot?.docs.find(
+    return !!chatsSnapshot?.docs.find(
       (chat) =>
-        chat.data().users?.find((user) => user === recipientEmail)?.length > 0
+        chat.data().user?.find((user) => user === recipientEmail)?.length > 0
     );
   };
 
@@ -50,34 +56,97 @@ export default function Sidebar() {
   };
 
   return (
-    <div>
-      <Container>
-        <StickyContainer>
-          <Header>
-            <UserDetails>
-              <UserAvatar src={user.photoURL} onClick={() => auth.signOut()} />
-              <UserEmail>{truncate(user.email)}</UserEmail>
-            </UserDetails>
-            <IconButton>
-              <ChatIcon style={{ color: "#AEBAC1" }} onClick={createChat} />
-            </IconButton>
-          </Header>
-          <Search>
-            <SearchInput
-              placeholder="Search or start new chat"
-              value={searchText}
-              setValue={setSearchText}
+    <Container>
+      <StickyContainer>
+        <Header>
+          <UserDetails>
+            <UserAvatar src={user.photoURL} onClick={() => auth.signOut()} />
+            <UserEmail>{truncate(user.email)}</UserEmail>
+          </UserDetails>
+          <IconButton>
+            <ChatIcon
+              style={{ color: "#AEBAC1" }}
+              onClick={() => showAddChatModal(true)}
             />
-          </Search>
-        </StickyContainer>
-        {filteredChats()?.map((chat) => (
-          <Chat key={chat.id} id={chat.id} users={chat.data().user} />
-        ))}
-      </Container>
-    </div>
+          </IconButton>
+        </Header>
+        <Search>
+          <SearchInput
+            placeholder="Search or start new chat"
+            value={searchText}
+            setValue={setSearchText}
+          />
+        </Search>
+      </StickyContainer>
+      {filteredChats()?.map((chat) => (
+        <Chat key={chat.id} id={chat.id} users={chat.data().user} />
+      ))}
+      <Modal title={"Add Chat"} isVisible={addChatModal} onClose={resetModal}>
+        <Form>
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <ButtonContainer>
+            <button
+              type="submit"
+              onClick={createChat}
+              disabled={email.trim() === ""}
+            >
+              Create
+            </button>
+          </ButtonContainer>
+        </Form>
+      </Modal>
+    </Container>
   );
 }
 
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  min-width: 500px;
+  background-color: #202c33;
+  > input {
+    border: none;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #111b21;
+    color: #aebac1;
+    font-size: 16px;
+    ::placeholder {
+      color: #aebac1;
+    }
+  }
+  > div > button {
+    border: none;
+    border-radius: 10px;
+    padding: 20px;
+    width: 30%;
+    background-color: #aebac1;
+    color: #111b21;
+    font-size: 16px;
+    cursor: pointer;
+    :hover {
+      background-color: #111b21;
+      color: #aebac1;
+    }
+    :disabled {
+      cursor: not-allowed;
+      background-color: #aebac1;
+      color: #111b21;
+    }
+  }
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
 const UserDetails = styled.div`
   display: flex;
   align-items: center;
